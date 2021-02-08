@@ -1,0 +1,3 @@
+MOV R0,#13
+MOV R1,#47
+SUB R2,R1,R0
