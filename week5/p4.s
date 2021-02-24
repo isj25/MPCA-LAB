@@ -1,0 +1,42 @@
+.DATA
+STR: .ASCIZ "HELLO WORLD"
+CHAR: .ASCIZ "O"
+PRES: .ASCIZ "CHARACTER O IS PRESENT"
+NOT: .ASCIZ "CHARACTER O IS NOT PRESENT"
+
+.TEXT
+MOV R3,#0
+LDR R1,=STR
+LDR R2,=CHAR
+
+LDRB R0,[R1]
+LDRB R4,[R2]
+CMP R0,#0
+BNE LOOP
+ 
+LOOP:
+     CMP R0,R4
+     BEQ INCR
+     CMP R0,#0
+     BEQ END
+     LDRB R0,[R1],#1
+     BNE LOOP
+ 
+INCR: 
+     ADD R3,R3,#1
+     CMP R0,#0
+     LDRB R0,[R1],#1
+     BNE LOOP
+     BEQ END
+     
+END:
+
+       CMP R3,#0
+       BEQ NOTEND
+       LDR R0,=PRES
+       SWI 0X02
+       SWI 0X011
+NOTEND:
+        LDR R0,=NOT
+        SWI 0X02
+        SWI 0X011

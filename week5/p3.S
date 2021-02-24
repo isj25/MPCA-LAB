@@ -1,0 +1,24 @@
+.DATA 
+STR: .ASCIZ "MPCA LAB"
+CPY: .ASCIZ ""
+
+
+.TEXT
+LDR R1,=STR
+LDR R2,=CPY
+LDRB R0,[R1]
+CMP R0,#0
+BNE LOOP
+LOOP:
+     STRB R0,[R2],#1
+     ADD R1,R1,#1
+     LDRB R0,[R1]
+     CMP R0,#0
+     BNE LOOP
+     BEQ ADD
+ ADD:
+     STRB R0,[R2]
+LDR R0,=CPY
+SWI 0X02
+SWI 0X011
+

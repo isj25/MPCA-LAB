@@ -1,0 +1,15 @@
+.DATA
+STR: .ASCIZ "PES UNIVERSITY BANGALORE"
+
+.TEXT
+MOV R2,#-1
+LDR R1,=STR
+LOOP:
+     LDRB R0,[R1],#1
+     CMP R0,#0
+     ADD R2,R2,#1
+     BNE LOOP
+     BEQ END
+END:
+        MOV R10,R2
+        SWI 0X011
